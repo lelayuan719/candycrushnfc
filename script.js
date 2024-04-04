@@ -1,33 +1,49 @@
-function getCandyCount() {
-  // Retrieve the candy count from local storage or default to 0
-  return parseInt(localStorage.getItem('candyCount'), 10) || 0;
-}
+function updateCandyCount(candyCount) {
+    for (let i = 1; i <= 5; i++) {
+      const candyImage = document.querySelector(`#candy-counter .candy:nth-child(${i})`);
+      candyImage.src = i <= candyCount ? `jellybean.png` : `jellybean_grey_${i}.png`;
+    }
+  }
+  
+  document.getElementById('update-candy-count').addEventListener('click', function() {
+    const count = parseInt(document.getElementById('candy-input').value, 10);
+    if (isNaN(count) || count < 0 || count > 5) {
+      alert('Please enter a count between 0 and 5.');
+      return;
+    }
+    updateCandyCount(count);
+  });
 
-function setCandyCount(count) {
-  // Save the candy count to local storage
-  localStorage.setItem('candyCount', count);
-  // Update the candy display
-  updateCandyDisplay(count);
+  function getCandyCountFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return parseInt(urlParams.get('candy'), 10);
 }
 
 function updateCandyDisplay(candyCount) {
+  // Ensure candyCount is within the valid range
+  candyCount = Math.max(0, Math.min(candyCount, 5));
+  
+  // Update candies based on the count
   const candies = document.querySelectorAll('#candy-counter .candy');
   candies.forEach((candy, index) => {
-    candy.src = index < candyCount ? `colored_candy_${index + 1}.png` : `grey_candy_${index + 1}.png`;
+    if (index < candyCount) {
+      // Show the colored candy
+      candy.src = `colored_candy_${index + 1}.png`; // Ensure you have colored images named correctly
+    } else {
+      // Show the grey candy
+      candy.src = `grey_candy_${index + 1}.png`;
+    }
   });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const candy = urlParams.get('candy');
+  let candyCount = getCandyCountFromUrl();
 
-  if (candy) {
-    // If 'candy' parameter is present, increment the candy count
-    let candyCount = getCandyCount();
-    candyCount = Math.min(candyCount + 1, 5); // Ensure the count does not exceed 5
-    setCandyCount(candyCount);
-  } else {
-    // If no 'candy' parameter, just update the display based on the current count
-    updateCandyDisplay(getCandyCount());
+  if (!isNaN(candyCount)) {
+    // Assume we store the collected candy count in localStorage
+    const storedCount = parseInt(localStorage.getItem('candyCount'), 10) || 0;
+    candyCount = storedCount + candyCount <= 5 ? storedCount + 1 : 5;
+    localStorage.setItem('candyCount', candyCount.toString());
+    updateCandyDisplay(candyCount);
   }
 });
