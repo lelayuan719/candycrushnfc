@@ -1,50 +1,37 @@
-// function updateCandyCount(candyCount) {
-//     for (let i = 1; i <= 5; i++) {
-//       const candyImage = document.querySelector(`#candy-counter .candy:nth-child(${i})`);
-//       candyImage.src = i <= candyCount ? `jellybean.png` : `jellybean_grey_${i}.png`;
-//     }
-//   }
-  
-//   document.getElementById('update-candy-count').addEventListener('click', function() {
-//     const count = parseInt(document.getElementById('candy-input').value, 10);
-//     if (isNaN(count) || count < 0 || count > 5) {
-//       alert('Please enter a count between 0 and 5.');
-//       return;
-//     }
-//     updateCandyCount(count);
-//   });
-
-  function getCandyCountFromUrl() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return parseInt(urlParams.get('candy'), 10);
+function getCandyCollection() {
+  // Retrieve the candy collection array from local storage or default to an empty array
+  const collection = JSON.parse(localStorage.getItem('candyCollection')) || [];
+  return collection;
 }
 
-function updateCandyDisplay(candyCount) {
-  // Ensure candyCount is within the valid range
-  candyCount = Math.max(0, Math.min(candyCount, 5))
-  console.log(candyCount);
-  
-  // Update candies based on the count
+function setCandyCollection(collection) {
+  // Save the candy collection array to local storage
+  localStorage.setItem('candyCollection', JSON.stringify(collection));
+  // Update the candy display
+  updateCandyDisplay(collection);
+}
+
+function updateCandyDisplay(collection) {
   const candies = document.querySelectorAll('#candy-counter .candy');
   candies.forEach((candy, index) => {
-    if (index < candyCount) {
-      // Show the colored candy
-      candy.src = `jellybean_color_${index + 1}.png`; // Ensure you have colored images named correctly
-    } else {
-      // Show the grey candy
-      candy.src = `jellybean_grey_${index + 1}.png`;
-    }
+    // If the candy at the current index is in the collection, show the colored candy
+    candy.src = collection.includes(index + 1) ? `jellybean_color_${index + 1}.png` : `jellybean_color_${index + 1}.png`;
   });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  let candyCount = getCandyCountFromUrl();
+  const urlParams = new URLSearchParams(window.location.search);
+  const candy = parseInt(urlParams.get('candy'), 10);
 
-  if (!isNaN(candyCount)) {
-    // Assume we store the collected candy count in localStorage
-    const storedCount = parseInt(localStorage.getItem('candyCount'), 10) || 0;
-    candyCount = storedCount + candyCount <= 5 ? storedCount + 1 : 5;
-    localStorage.setItem('candyCount', candyCount.toString());
-    updateCandyDisplay(candyCount);
+  // Retrieve the current collection from local storage
+  const collection = getCandyCollection();
+
+  if (candy && !collection.includes(candy)) {
+    // If 'candy' parameter is present and not already in the collection, add it
+    collection.push(candy);
+    setCandyCollection(collection);
+  } else {
+    // If no 'candy' parameter or it's already in the collection, just update the display
+    updateCandyDisplay(collection);
   }
 });
