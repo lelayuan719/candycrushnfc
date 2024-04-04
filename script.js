@@ -25,17 +25,17 @@ function updateCandyDisplay(candyCount) {
   console.log(candyCount);
   
   // Update candies based on the count
-  const candies = document.querySelectorAll('#candy-counter .candy');
-  candies.forEach((candy, index) => {
-    if (index < candyCount) {
-      // Show the colored candy
-      candy.src = `jellybean_color_${index + 1}.png`; // Ensure you have colored images named correctly
-    } else {
-      // Show the grey candy
-      candy.src = `jellybean_grey_${index + 1}.png`;
-    }
-  });
-}
+//   const candies = document.querySelectorAll('#candy-counter .candy');
+//   candies.forEach((candy, index) => {
+//     if (index < candyCount) {
+//       // Show the colored candy
+//       candy.src = `jellybean_color_${index + 1}.png`; // Ensure you have colored images named correctly
+//     } else {
+//       // Show the grey candy
+//       candy.src = `jellybean_grey_${index + 1}.png`;
+//     }
+//   });
+// }
 
 document.addEventListener('DOMContentLoaded', function() {
   let candyCount = getCandyCountFromUrl();
