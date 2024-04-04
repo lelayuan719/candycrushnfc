@@ -21,7 +21,8 @@ function updateCandyCount(candyCount) {
 
 function updateCandyDisplay(candyCount) {
   // Ensure candyCount is within the valid range
-  candyCount = Math.max(0, Math.min(candyCount, 5));
+  candyCount = Math.max(0, Math.min(candyCount, 5))
+  console.log(candyCount);
   
   // Update candies based on the count
   const candies = document.querySelectorAll('#candy-counter .candy');
@@ -48,4 +49,3 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-console.log(candyCount)
