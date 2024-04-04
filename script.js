@@ -1,37 +1,47 @@
 function getCandyCollection() {
-  // Retrieve the candy collection array from local storage or default to an empty array
-  const collection = JSON.parse(localStorage.getItem('candyCollection')) || [];
-  return collection;
+  const collection = localStorage.getItem('candyCollection');
+  return collection ? JSON.parse(collection) : [];
 }
 
-function setCandyCollection(collection) {
-  // Save the candy collection array to local storage
+// Function to save the updated candy collection to local storage
+function saveCandyCollection(collection) {
   localStorage.setItem('candyCollection', JSON.stringify(collection));
-  // Update the candy display
-  updateCandyDisplay(collection);
 }
 
-function updateCandyDisplay(collection) {
+// Function to update the display of candies based on the candy collection
+function updateCandyDisplay() {
+  const candyCollection = getCandyCollection();
+  const candyCount = candyCollection.length;
+  
+  // Update the display for each candy slot
   const candies = document.querySelectorAll('#candy-counter .candy');
   candies.forEach((candy, index) => {
-    // If the candy at the current index is in the collection, show the colored candy
-    candy.src = collection.includes(index + 1) ? `jellybean_color_${index + 1}.png` : `jellybean_color_${index + 1}.png`;
+    // Use the colored image if the index is less than the count of collected candies
+    if (index < candyCount) {
+      // Assuming you have a corresponding colored candy image for each collected type
+      const candyType = candyCollection[index];
+      candy.src = `jellybean_color_${candyType}.png`;
+    } else {
+      // Otherwise, use the grey image
+      candy.src = `jellybean_grey_${index + 1}.png`;
+    }
   });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if a new candy was collected based on the URL parameter
   const urlParams = new URLSearchParams(window.location.search);
-  const candy = parseInt(urlParams.get('candy'), 10);
+  const collectedCandy = urlParams.get('candy');
 
-  // Retrieve the current collection from local storage
-  const collection = getCandyCollection();
-
-  if (candy && !collection.includes(candy)) {
-    // If 'candy' parameter is present and not already in the collection, add it
-    collection.push(candy);
-    setCandyCollection(collection);
-  } else {
-    // If no 'candy' parameter or it's already in the collection, just update the display
-    updateCandyDisplay(collection);
+  if (collectedCandy) {
+    // If a new candy was collected, add it to the collection (if not already present)
+    const candyCollection = getCandyCollection();
+    if (candyCollection.length < 5 && candyCollection.indexOf(collectedCandy) === -1) {
+      candyCollection.push(collectedCandy);
+      saveCandyCollection(candyCollection);
+    }
   }
+
+  // Update the candy display
+  updateCandyDisplay();
 });
