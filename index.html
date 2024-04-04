@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candy Collector</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="candy-counter">
+  <!-- Initial grey candies -->
+  <img class="candy" src="jellybean_grey_1.png" alt="Candy 1">
+  <img class="candy" src="jellybean_grey_2.png" alt="Candy 2">
+  <img class="candy" src="jellybean_grey_3.png" alt="Candy 3">
+  <img class="candy" src="jellybean_grey_4.png" alt="Candy 4">
+  <img class="candy" src="jellybean_grey_5.png" alt="Candy 5">
+</div>
+
+<div id="found_text">
+   You have found a jelly bean!
+</div>
+
+<div id="candy-display">
+  <!-- The tapped candy will be displayed here -->
+  <img id="center-candy" src="jellybean.png" alt="Candy">
+</div>
+
+<div id="candyleft_text">
+</div>
+
+<div id="candyland">
+  <!-- The tapped candy will be displayed here -->
+  <img id="candyland_picture" src="candyland.png" alt="Candyland">
+</div>
+
+
+<div id="manual-input">
+  <input type="number" id="candy-input" placeholder="Enter candy count" min="0" max="5">
+  <button id="update-candy-count">Update Candy Count</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

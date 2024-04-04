@@ -1,0 +1,60 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9c2d0; /* Adjust the background color to match your design */
+}
+
+
+
+#candy-counter {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#candy-counter img {
+  width: 50px;
+  height: auto;
+  margin: 0 5px;
+}
+
+#candy-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 40px); /* Adjust the height based on your header's actual height */
+}
+
+#candy-display img {
+  max-width: 50%;
+  height: auto;
+}
+
+
+#candyland {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+}
+
+#candyland_picture img {
+  width: 50%;
+  height: auto;
+}
+
+#manual-input {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#manual-input input {
+  padding: 5px;
+  margin-right: 5px;
+}
+
+#manual-input button {
+  padding: 5px 10px;
+}
