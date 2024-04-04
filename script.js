@@ -28,10 +28,10 @@ function updateCandyDisplay(candyCount) {
   candies.forEach((candy, index) => {
     if (index < candyCount) {
       // Show the colored candy
-      candy.src = `colored_candy_${index + 1}.png`; // Ensure you have colored images named correctly
+      candy.src = `jellybean_color${index + 1}.png`; // Ensure you have colored images named correctly
     } else {
       // Show the grey candy
-      candy.src = `grey_candy_${index + 1}.png`;
+      candy.src = `jellybean_grey_${index + 1}.png`;
     }
   });
 }
