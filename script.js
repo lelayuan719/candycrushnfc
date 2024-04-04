@@ -1,18 +1,18 @@
-function updateCandyCount(candyCount) {
-    for (let i = 1; i <= 5; i++) {
-      const candyImage = document.querySelector(`#candy-counter .candy:nth-child(${i})`);
-      candyImage.src = i <= candyCount ? `jellybean.png` : `jellybean_grey_${i}.png`;
-    }
-  }
+// function updateCandyCount(candyCount) {
+//     for (let i = 1; i <= 5; i++) {
+//       const candyImage = document.querySelector(`#candy-counter .candy:nth-child(${i})`);
+//       candyImage.src = i <= candyCount ? `jellybean.png` : `jellybean_grey_${i}.png`;
+//     }
+//   }
   
-  document.getElementById('update-candy-count').addEventListener('click', function() {
-    const count = parseInt(document.getElementById('candy-input').value, 10);
-    if (isNaN(count) || count < 0 || count > 5) {
-      alert('Please enter a count between 0 and 5.');
-      return;
-    }
-    updateCandyCount(count);
-  });
+//   document.getElementById('update-candy-count').addEventListener('click', function() {
+//     const count = parseInt(document.getElementById('candy-input').value, 10);
+//     if (isNaN(count) || count < 0 || count > 5) {
+//       alert('Please enter a count between 0 and 5.');
+//       return;
+//     }
+//     updateCandyCount(count);
+//   });
 
   function getCandyCountFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
