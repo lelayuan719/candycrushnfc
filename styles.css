@@ -43,18 +43,3 @@ body, html {
   width: 50%;
   height: auto;
 }
-
-#manual-input {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-#manual-input input {
-  padding: 5px;
-  margin-right: 5px;
-}
-
-#manual-input button {
-  padding: 5px 10px;
-}
