@@ -48,4 +48,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-console.log(candycount)
+console.log(candyCount)
