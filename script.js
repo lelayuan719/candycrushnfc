@@ -1,3 +1,4 @@
+// Function to retrieve the candy collection from local storage or initialize it if it doesn't exist
 function getCandyCollection() {
   const collection = localStorage.getItem('candyCollection');
   return collection ? JSON.parse(collection) : [];
@@ -45,4 +46,3 @@ document.addEventListener('DOMContentLoaded', function() {
   // Update the candy display
   updateCandyDisplay();
 });
-
