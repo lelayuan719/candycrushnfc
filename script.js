@@ -1,8 +1,8 @@
 // Define an object to store the counts for each candy type
 const candyCounts = {
-  jellybean: 0,
-  yellow: 0,
-  purple: 0
+  type1: 0,
+  type2: 0,
+  type3: 0
 };
 
 // Function to retrieve the candy counts from local storage or initialize them if they don't exist
