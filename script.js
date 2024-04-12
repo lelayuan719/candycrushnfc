@@ -28,25 +28,24 @@ function updateCandyDisplay(candyType) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Check if a new candy was collected based on the URL parameter
   const urlParams = new URLSearchParams(window.location.search);
   const collectedCandyType = urlParams.get('type');
   const collectedCandyTag = urlParams.get('tag');
 
+  const collections = getCandyCollections();
+
   if (collectedCandyType && collectedCandyTag) {
     // If a new candy was collected, update the collection for that candy type
-    const collections = getCandyCollections();
     const collection = collections[collectedCandyType];
 
     if (!collection.includes(collectedCandyTag) && collection.length < 5) {
       collection.push(collectedCandyTag);
       saveCandyCollections(collections);
-
-      // Update the display for the collected type of candy
-      updateCandyDisplay(collectedCandyType);
     }
-  } else {
-    // If no new candy was collected, you can choose to update display for a default candy type
-    // or handle it as needed
   }
+  
+  // Always update the display for the last visited type of candy or a default one
+  // This ensures the page correctly displays the count of the candy already collected
+  const lastVisitedType = collectedCandyType || Object.keys(collections)[0];
+  updateCandyDisplay(lastVisitedType);
 });
